@@ -15,7 +15,7 @@
       <!-- bootstrap css -->
       <link rel="stylesheet" href="css/bootstrap.min.css">
       <!-- style css -->
-      <link rel="stylesheet" href="css/style.css">
+      
       <!-- Responsive-->
       <link rel="stylesheet" href="css/responsive.css">
       <!-- fevicon -->
@@ -29,6 +29,7 @@
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <link rel="stylesheet" href="css/style.css">
    </head>
    <!-- body -->
    <body class="main-layout">
@@ -50,6 +51,7 @@
                               <li><img src="images/1.png" alt="#"/> 145.street road new York</li>
                               <li><img src="images/2.png" alt="#"/> +71  5678954378</li>
                               <li><img src="images/3.png" alt="#"/> Demo@hmail.com</li>
+                              <li><a href="signup.php">Signup</a> / <a href="login.php">Login</a></li>
                            </ul>
                         </div>
                      </div>
@@ -61,7 +63,7 @@
                   <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
                      <div class="full">
                         <div class="center-desk">
-                           <div class="logo"> <a href="index.html"><img src="images/logo.png" alt="#"></a> </div>
+                           <div class="logo"> <a href="index.php"><img src="images/logo.png" alt="#"></a> </div>
                         </div>
                      </div>
                   </div>

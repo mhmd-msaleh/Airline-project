@@ -69,6 +69,7 @@
       <script src="js/custom.js"></script>
       <!-- javascript --> 
       <script src="js/owl.carousel.js"></script>
+      <script src="js/myscript.js"></script>
       <script>
          $(document).ready(function() {
            var owl = $('.owl-carousel');

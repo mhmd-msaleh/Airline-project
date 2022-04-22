@@ -1071,7 +1071,7 @@ ul.top_icon li a {
      position: relative;
 }
 
-.main-menu ul>li a {
+.header-link {
      line-height: 20px;
      font-size: 16px;
      display: block;
@@ -1081,8 +1081,6 @@ ul.top_icon li a {
      padding-top: 24px;
 }
 
-
-}
 .main-menu ul li:last-child a {
      padding-right: 0;
 }
@@ -1156,7 +1154,7 @@ ul.top_icon li a {
      display: inline-block;
      vertical-align: middle;
 }
-.main-menu ul>li:nth-child (6) {
+.main-menu ul>li:nth-child(6) {
      padding-right: 0px;
 }
 .nav>li {
@@ -1697,7 +1695,7 @@ input[type="radio"] .styled:checked+label::after {
      border: #fff solid 2px;
      color: #000;
 }
-.main-form a {
+.main-form .btn {
      background: #ee580f;
      color: #fff;
      float: left;
@@ -1777,7 +1775,7 @@ input[type="radio"] .styled:checked+label::after {
      -moz-background-size: 100% 20px;
      background-size: 100% 20px;
      background-image: -webkit-linear-gradient(left, #077f9b 0%, #0c1e43 100%), -webkit-linear-gradient(left, #077f9b 0%, #0c1e43 100%);
-     background-image: -moz-linear-gradient(left, #077f9b 0%, #0c1e43 100%), -moz-linear-gradient(left, #077f9b 0%, #0c1e434 100%);
+     background-image: -moz-linear-gradient(left, #077f9b 0%, #0c1e43 100%), -moz-linear-gradient(left, #077f9b 0%, #c1e434 100%);
      background-image: -o-linear-gradient(left, #077f9b 0%, #0c1e43 100%), -o-linear-gradient(left, #077f9b 0%, #0c1e43 100%);
      background-image: linear-gradient(to right, #077f9b 0%, #0c1e43 100%), linear-gradient(to right, #077f9b 0%, #0c1e43 100%);
      max-width: 1004px;
@@ -1842,7 +1840,7 @@ input[type="radio"] .styled:checked+label::after {
      margin-left: 15px;
 }
 .titlepage h2::before,
-. .titlepage h2::after {
+.titlepage h2::after {
      content: "";
      position: absolute;
      height: 5px;

@@ -3,7 +3,7 @@ require_once("include/header.php");
 ?>
       <section>
          <div class="banner-main">
-            <img src="images/banner.jpg" alt="#"/>
+            <img src="images/airplane_banner2.jpg" alt="#"/>
             <div class="container">
                <div class="text-bg">
                   <h1>Something<br><strong class="white">Airline</strong></h1>
@@ -50,7 +50,7 @@ require_once("include/header.php");
                               </div>
                            </div>
                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                              <a href="#">search</a>
+                              <a class="btn" href="#">search</a>
                            </div>
                         </div>
                      </form>
