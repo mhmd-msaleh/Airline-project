@@ -1,0 +1,41 @@
+
+--  ADDING NEW USER
+INSERT INTO USER (Username, Password, Email) 
+VALUES (?,?,?); 
+
+--  SEARCH FOR A FLIGHT NUMBER
+SELECT Flight_NO 
+FROM FLIGHT
+Where Date=?
+AND Destination=?
+AND Departure=? ;
+
+--  SEARCH FLIGHT TO A DESTINATION 
+SELECT * 
+FROM FLIGHT 
+WHERE Destination=?;
+
+-- SEARCH FLIGHT FROM DEPARTURE
+SELECT * 
+FROM FLIGHT 
+WHERE Departure=? ; 
+
+--  SEARCH FLIGHT ON A DATE
+SELECT * 
+FROM FLIGHT 
+WHERE Date=? ; 
+
+--  MAKE NEW PAYMENT 
+NSERT INTO `PAYMENT` 
+(`Amount`, `Date`, `Time`, `Card_NO`) 
+VALUES (?, CURRENT_DATE(), CURRENT_TIME(), ?);
+
+--  GET PASSENGER INFO FROM USERNAME AND PASSWORD
+SELECT * 
+FROM PASSENGER 
+WHERE User_id = (
+    SELECT ID 
+    FROM USER 
+    WHERE Username = ?
+    AND Password = ? 
+);
