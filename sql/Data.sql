@@ -19,7 +19,8 @@ INSERT INTO FLIGHT (Date, Time, Destination, Departure, Plane_NO) VALUES
 
 INSERT INTO USER (Username, Password, Email) VALUES 
 ("moha1234", "password", "moh@gmail.com"), 
-("slooh34", "pass1234", "sal1234@gmail.com"); 
+("slooh34", "pass1234", "sal1234@gmail.com"), 
+('khalid34', 'khal123456', 'khalid@gmail.com'); 
 
 INSERT INTO PASSENGER (SSN, Name, DoB, Gender, Phone, Email, User_id) VALUES
 (123456789, "Mohammed Ahmad", "2000-05-01", "M", "0541234567", "moh@gmail.com", 1), 

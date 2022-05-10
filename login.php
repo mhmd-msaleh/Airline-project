@@ -12,7 +12,7 @@ include_once("php/header.php")
                         <label >Username</label>
                         <input class="form-control" placeholder="username1234" type="text" name="Username">
                         <label >Password</label>
-                        <input class="form-control" placeholder="*********" type="text" name="password">
+                        <input class="form-control" placeholder="*********" type="text" name="Password">
                         <input class="btn" type="submit" value="Login">
                     </div>
                 </div>

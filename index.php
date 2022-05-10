@@ -8,15 +8,15 @@ require_once("php/header.php");
                <div class="text-bg">
                   <h1>Something<br><strong class="white">Airline</strong></h1>
                   <div class="button_section"> <a class="main_bt" href="#">Read More</a>  </div>
-                  <div class="container">
-                     <form class="main-form" action="php/user.php" method="get">
+                  <div class="container " id="search-card">
+                     <form class="main-form" action="php/search.php" method="get">
                         <h3>Find Your Flight</h3>
                         <div class="row">
                            <div class="col-md-9">
                               <div class="row">
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Departure</label>
-                                    <input class="form-control" placeholder="" type="text" name="departure">
+                                    <input class="form-control" placeholder="" type="text" name="Departure">
                                  </div>
                                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Category</label>
@@ -29,19 +29,15 @@ require_once("php/header.php");
                                  </div> -->
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Destination</label>
-                                    <input class="form-control" placeholder="" type="text" name="destination">
+                                    <input class="form-control" placeholder="" type="text" name="Destination">
                                  </div>
                                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Duration</label>
                                     <input class="form-control" placeholder="Any" type="text" name="Any">
                                  </div> -->
                                  <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >From</label>
-                                    <input class="form-control" placeholder="Any" type="date" name="departure_date">
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >To</label>
-                                    <input class="form-control" placeholder="Any" type="date" name="destination_date">
+                                    <label >Date</label>
+                                    <input class="form-control" placeholder="Any" type="date" name="Date">
                                  </div>
                                  <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
                                     <label >Max Price</label>
@@ -59,6 +55,12 @@ require_once("php/header.php");
             </div>
          </div>
       </section>
+
+      <script>
+         let show_area = document.getElemntById("search-card");
+          
+         
+      </script>
 <?php
 require_once("php/footer.php"); 
 ?>

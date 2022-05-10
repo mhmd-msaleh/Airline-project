@@ -12,7 +12,7 @@ class Database{
         $database = "airline"; 
         $this->connection = new mysqli($host, $user, $password, $database); 
         // print_r(this->$connection)
-        if(this->connection->connect_error){
+        if($this->connection->connect_error){
             die("Connection failed: " . mysqli_connect_error()); 
         }
     } 
@@ -24,7 +24,7 @@ class Database{
             return mysqli_fetch_all($query_result, MYSQLI_ASSOC); 
         }
         elseif($query_type === "POST"){
-            return mysqli($this->connection, $sql); 
+            return mysqli_query($this->connection, $sql_query); 
         }
     }
     /*********** User Functionalities **************/
@@ -37,71 +37,80 @@ class Database{
      * Book seat
      * Pay
      */
-    public function addUser(array $user_object){    // Sign up
-        $username = $user_object["username"]; 
-        $password = $user_object["password"]; 
-        $email = $user_object["email"]; 
-
-        $sql = "INSERT INTO USER VALUES('$username', '$password', '$email'); "; 
-        return execQurey($sql, "POST"); 
+    public function addUser($username, $password, $email){    // Sign up
+        $hashed_password = md5($password); 
+        $sql = "INSERT INTO USER (Username, Password, Email) VALUES ('$username', '$hashed_password', '$email'); "; 
+        return $this->execQurey($sql, "POST"); 
     }
 
     public function getUserID($username, $password){
         $sql = "SELECT ID 
         FROM USER
         WHERE Username ='$username' 
-        AND Password ='$password'; "; 
+        AND Password = MD5('$password'); "; 
 
-        return execQurey($sql, "GET"); 
+        return $this->execQurey($sql, "GET"); 
     }
-    public function getUserData(array $user_object, $isPassenger){  // Sign in 
-        $username = $user_object["username"]; 
-        $password = $user_object["password"]; 
-        // if the user is a previous passenger get his informaiton
-        $sql = ""; 
-        if($isPassenger){
-            $sql = "SELECT * FROM USER NATURAL JOIN PASSENGER
-            WHERE Username = '$username'
-            And Password = '$password'; "; 
-        }
-        else{
-            $sql = "SELECT * FROM USER
-            WHERE Username = '$username'
-            And Password = '$password'; "; 
-        }
-        return execQurey($sql, "GET"); 
+
+    public function getUserIDByUsername($username){
+        $sql = "SELECT ID 
+        FROM USER
+        WHERE Username ='$username'; "; 
+
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    
+    public function getUserData($id){  // Sign in 
+
+    
+        $sql = "SELECT * FROM PASSENGER
+        WHERE User_id = '$id'; "; 
+        return $this->execQurey($sql, "GET"); 
     }
 
     /************************ Search Flights ***********************/
-    public function getFlightNumber(array $date, $destination, $departure){
-        $sql="SELECT Flight_NO 
-        FROM FLIGHT
-        Where Date='$date'
-        AND Destination='$destination'
-        AND Departure='$departure';"; 
+    // public function getFlightNumber(array $date, $destination, $departure){
+    //     $sql="SELECT Flight_NO 
+    //     FROM FLIGHT
+    //     Where Date='$date'
+    //     AND Destination='$destination'
+    //     AND Departure='$departure';"; 
 
-        return execQurey($sql, "GET"); 
-    }
-    public function getFlightsTo($destination){
-        $sql="SELECT * 
-        FROM FLIGHT 
-        WHERE Destination='$destination'; "; 
+    //     return $this->execQurey($sql, "GET"); 
+    // }
+    // public function getFlightsTo($destination){
+    //     $sql="SELECT * 
+    //     FROM FLIGHT 
+    //     WHERE Destination='$destination'; "; 
 
-        return execQurey($sql, "GET"); 
-    }
-    public function getFlightsFrom($departure){
-        $sql="SELECT * 
-        FROM FLIGHT 
-        WHERE Departure='$departure'; "; 
+    //     return $this->execQurey($sql, "GET"); 
+    // }
+    // public function getFlightsFrom($departure){
+    //     $sql="SELECT * 
+    //     FROM FLIGHT 
+    //     WHERE Departure='$departure'; "; 
 
-        return execQurey($sql, "GET"); 
-    }
-    public function getFlightsOn($date){
-        $sql="SELECT * 
-        FROM FLIGHT 
-        WHERE Date='$date'; "; 
+    //     return $this->execQurey($sql, "GET"); 
+    // }
+    // public function getFlightsOn($date){
+    //     $sql="SELECT * 
+    //     FROM FLIGHT 
+    //     WHERE Date='$date'; "; 
 
-        return execQurey($sql, "GET"); 
+    //     return $this->execQurey($sql, "GET"); 
+    // }
+
+    public function getFlights($date, $destination, $departure){
+        // we use intersection to handle the case when a variable is null
+        $conditions = array(); 
+        if(!empty($date)) { $conditions[] = "Date = '$date'"; }
+        if(!empty($destination)) { $conditions[] = "Destination = '$destination'"; }
+        if(!empty($departure)) { $conditions[] = "Departure = '$departure'"; }
+        $where = implode(' AND ', $conditions); 
+        $sql = "SELECT Flight_NO, Destination, Departure, Date, Time FROM FLIGHT 
+                WHERE " . $where; 
+        return $this->execQurey($sql, "GET"); 
     }
     /************************************************************* */
 
@@ -112,7 +121,7 @@ class Database{
     // the ticket numbe will be sequinatialy that is automatically generated by the database
     // the wight of the ticket can be defined later 
     public function generateTicket(){
-
+        
     }
     public function bookTicket(){}
     public function deleteTicket(){}
@@ -123,7 +132,7 @@ class Database{
         (`Payment_NO`, `Amount`, `Date`, `Time`, `Card_NO`) 
         VALUES (NULL, '$price', CURRENT_DATE(), CURRENT_TIME(), '$card_no');"; 
 
-        return execQurey($sql, "POST"); 
+        return $this->execQurey($sql, "POST"); 
     }
 
     /************************************************************* */
