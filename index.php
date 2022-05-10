@@ -1,269 +1,194 @@
 <?php
 require_once("include/header.php"); 
 ?>
-      <section>
-         <div class="banner-main">
-            <img src="images/airplane_banner2.jpg" alt="#"/>
+
+
+    <!--Booking Section-->
+    <div class="container rounded">
+
+        <form action="">
+            <div class="row">
+                <div class="col-md-3 col-sm-10">
+                    <div class="btn radio-btn mb-3"> <label class="radio"> <input type="radio" value="roundTrip"
+                                name="book" checked> Round Trip <span></span> </label> </div>
+                </div>
+                <div class="col-md-3   col-sm-10">
+                    <div class="btn radio-btn mb-3"> <label class="radio"> <input type="radio" value="oneWay"
+                                name="book">
+                            One Way <span></span> </label> </div>
+                </div>
+                <div class="col-md-3   col-sm-10">
+                    <div class="btn radio-btn mb-3"> <label class="radio"> <input type="radio" value="multiCity"
+                                name="book">
+                            Multi-City <span></span> </label> </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 col-12 mb-4">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">FROM</p> <input class="inputbox" placeholder="City or Airport" type="text">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 mb-4">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">TO</p> <input class="inputbox" placeholder="City or Airport" type="text">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-6 col-12 mb-4">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">DEPARTURE</p> <input class="inputbox textmuted" type="date">
+                    </div>
+                </div>
+                <div class="col-md-6 col-12 mb-4">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">RETURN</p> <input class="inputbox textmuted " type="date">
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-md-3 mb-3">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">ADULTS 12+</p> <select class="border-0 outline-none">
+                            <option value="" hidden selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">CHILDREN 2-11</p> <select class="border-0 outline-none">
+                            <option value="" hidden selected>0</option>
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">INFANTS < 2</p> <select class="border-0 outline-none">
+                                    <option value="" hidden selected>0</option>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                </select>
+                    </div>
+                </div>
+
+                <div class="col-md-3 mb-3">
+                    <div class="form-control d-flex flex-column">
+                        <p class="h-blue">CLASS</p> <select class="border-0 outline-none">
+                            <option value="" hidden selected>Class</option>
+                            <option value="economy">Economy</option>
+                            <option value="premium">Premium</option>
+                            <option value="business">Business</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="btn btn-primary form-control text-center">SHOW FLIGHTS</div>
+        </form>
+    </div>
+
+    <!--About Section-->
+    <div id="about" class="container rounded">
+
+        <div class="row">
+            <div class="col-md-12 ">
+                <div class="titlepage">
+                    <h2>About our travel agency</h2>
+                    <span> fact that a reader will be distracted by the readable content of a page when looking at
+                        its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution
+                        of letters,</span>
+                </div>
+                <div class="about-box">
+                    <p> <span>There are many variations of passages of Lorem Ipsum available, but the majority
+                            have suffered alteration in some form, by injected humour, or randomised words which
+                            don't look even slightly believable. If you are going to use a passage of Lorem
+                            Ipsum, you need to be sure thereThere are many variations of passages of Lorem Ipsum
+                            available, but the majority have suffered alteration in some form, by injected
+                            humour, or randomised words which don't look even slightly believable. If you are
+                            going to use a passage of Lorem Ipsum, you need to be sure there</span></p>
+                    <div class="palne-img-area">
+                        <img src="images/plane-img.png" alt="images">
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!--Traveling Section-->
+        <div id="travel" class="traveling">
             <div class="container">
-               <div class="text-bg">
-                  <h1>Something<br><strong class="white">Airline</strong></h1>
-                  <div class="button_section"> <a class="main_bt" href="#">Read More</a>  </div>
-                  <div class="container">
-                     <form class="main-form">
-                        <h3>Find Your Flight</h3>
-                        <div class="row">
-                           <div class="col-md-9">
-                              <div class="row">
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Departure</label>
-                                    <input class="form-control" placeholder="" type="text" name="departure">
-                                 </div>
-                                 <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Category</label>
-                                    <select class="form-control" name="Any">
-                                       <option>Any</option>
-                                       <option>Option 1</option>
-                                       <option>Option 2</option>
-                                       <option>Option 3</option>
-                                    </select>
-                                 </div> -->
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Destination</label>
-                                    <input class="form-control" placeholder="" type="text" name="destination">
-                                 </div>
-                                 <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Duration</label>
-                                    <input class="form-control" placeholder="Any" type="text" name="Any">
-                                 </div> -->
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >From</label>
-                                    <input class="form-control" placeholder="Any" type="date" name="departure_date">
-                                 </div>
-                                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >To</label>
-                                    <input class="form-control" placeholder="Any" type="date" name="destination_date">
-                                 </div>
-                                 <!-- <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-12">
-                                    <label >Max Price</label>
-                                    <input class="form-control" placeholder="00.0" type="text" name="00.0">
-                                 </div> -->
-                              </div>
-                           </div>
-                           <div class="col-xl-3 col-lg-3 col-md-3 col-sm-12 col-12">
-                              <a class="btn" href="#">search</a>
-                           </div>
+                <div class="row">
+                    <div class="col-md-12 ">
+                        <div class="titlepage">
+                            <h2>Select Offers For Traveling</h2>
+                            <span>It is a long established fact that a reader will be distracted by the readable content
+                                of
+                                a page when looking at its layout. The point of using Lorem Ipsum is that it has a
+                                more-or-less normal distribution of letters,</span>
                         </div>
-                     </form>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </section>
-      <!-- about -->
-      <div id="about" class="about">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12 ">
-                  <div class="titlepage">
-                     <h2>About  our travel agency</h2>
-                     <span> fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span>
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="bg">
-            <div class="container">
-               <div class="row">
-                  <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                     <div class="about-box">
-                        <p> <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure thereThere are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span></p>
-                        <div class="palne-img-area">
-                           <img src="images/plane-img.png" alt="images">
+                    </div>
+                </div>
+                <span></span>
+                <div class="row">
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="traveling-box">
+                            <i><img src="icon/travel-icon.png" alt="icon" class="icon" /></i>
+                            <h3>Different Countries</h3>
+                            <p> going to use a passage of Lorem Ipsum, you need to be </p>
+
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </div>
-            <a href="#">Read More</a>
-         </div>
-      </div>
-      <!-- end about -->
-      <!-- traveling -->
-      <div id="travel" class="traveling">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12 ">
-                  <div class="titlepage">
-                     <h2>Select Offers For Traveling</h2>
-                     <span>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span> 
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="traveling-box">
-                     <i><img src="icon/travel-icon.png" alt="icon"/></i>
-                     <h3>Different Countrys</h3>
-                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                     <div class="read-more">
-                        <a  href="#">Read More</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="traveling-box">
-                     <i><img src="icon/travel-icon2.png" alt="icon"/></i>
-                     <h3>Mountains Tours</h3>
-                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                     <div class="read-more">
-                        <a  href="#">Read More</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="traveling-box">
-                     <i><img src="icon/travel-icon3.png" alt="icon"/></i>
-                     <h3>Bus Tours</h3>
-                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                     <div class="read-more">
-                        <a  href="#">Read More</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
-                  <div class="traveling-box">
-                     <i><img src="icon/travel-icon4.png" alt="icon"/></i>
-                     <h3>Summer Rest</h3>
-                     <p> going to use a passage of Lorem Ipsum, you need to be </p>
-                     <div class="read-more">
-                        <a  href="#">Read More</a>
-                     </div>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end traveling -->
-      <!--London -->
-      <div class="London">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Weekend in New York, London</h2>
-                     <span>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span> 
-                  </div>
-               </div>
-            </div>
-         </div>
-         <div class="container-fluid">
-            <div class="London-img">
-               <figure><img src="images/London.jpg" alt="img"/></figure>
-            </div>
-         </div>
-      </div>
-      <!-- end London -->
-      <!--Tours -->
-      <div class="Tours">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>The Best Tours</h2>
-                     <span>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span> 
-                  </div>
-               </div>
-            </div>
-            <section id="demos">
-               <div class="row">
-                  <div class="col-md-12">
-                     <div class="owl-carousel owl-theme">
-                        <div class="item">
-                           <img class="img-responsive" src="images/1.jpg" alt="#" />
-                           <h3>Holiday Tour</h3>
-                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="traveling-box">
+                            <i><img src="icon/travel-icon2.png" alt="icon" class="icon" /></i>
+                            <h3>Mountains Tours</h3>
+                            <p> going to use a passage of Lorem Ipsum, you need to be </p>
+
                         </div>
-                        <div class="item">
-                           <img class="img-responsive" src="images/2.jpg" alt="#" />
-                           <h3>New York</h3>
-                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="traveling-box">
+                            <i><img src="icon/travel-icon3.png" alt="icon" class="icon" /></i>
+                            <h3>Bus Tours</h3>
+                            <p> going to use a passage of Lorem Ipsum, you need to be </p>
+
                         </div>
-                        <div class="item">
-                           <img class="img-responsive" src="images/3.jpg" alt="#" />
-                           <h3>London</h3>
-                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
+                    </div>
+                    <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
+                        <div class="traveling-box">
+                            <i><img src="icon/travel-icon4.png" alt="icon" class="icon" /></i>
+                            <h3>Summer Rest</h3>
+                            <p> going to use a passage of Lorem Ipsum, you need to be </p>
+
                         </div>
-                        <div class="item">
-                           <img class="img-responsive" src="images/2.jpg" alt="#" />
-                           <h3>Holiday Tour</h3>
-                           <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in soe suffk even slightly believable. If y be sure there</p>
-                        </div>
-                     </div>
-                  </div>
-               </div>
-            </section>
-         </div>
-      </div>
-      <!-- end Tours -->
-      <!-- Amazing -->
-      <div class="amazing">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="amazing-box">
-                     <h2>Amazing London Tour</h2>
-                     <span>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there</span>
-                     <a href="#">Book Now</a><a href="#">Get More</a>
-                  </div>
-               </div>
+                    </div>
+                </div>
             </div>
-         </div>
-      </div>
-      <!-- end Amazing -->
-      <!-- our blog -->
-      <div id="blog" class="blog">
-         <div class="container">
-            <div class="row">
-               <div class="col-md-12">
-                  <div class="titlepage">
-                     <h2>Our Blog</h2>
-                     <span>Lorem Ipsum is that it has a more-or-less normal distribution of letters,</span> 
-                  </div>
-               </div>
-            </div>
-            <div class="row">
-               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div class="blog-box">
-                     <figure><img src="images/blog-image0.jpg" alt="#"/>
-                        <span>4 Feb 2019</span>
-                     </figure>
-                     <div class="travel">
-                        <span>Post  By :  Travel  Agency</span> 
-                        <p><strong class="Comment"> 06 </strong>  Comment</p>
-                        <p><strong class="like">05 </strong>Like</p>
-                     </div>
-                     <h3>London Amazing Tour</h3>
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
-                  </div>
-               </div>
-               <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                  <div class="blog-box">
-                     <figure><img src="images/blog-image.jpg" alt="#"/>
-                        <span>10 Feb 2019</span>
-                     </figure>
-                     <div class="travel">
-                        <span>Post  By :  Travel  Agency</span> 
-                        <p><strong class="Comment"> 06 </strong>  Comment</p>
-                        <p><strong class="like">05 </strong>Like</p>
-                     </div>
-                     <h3>London Amazing Tour</h3>
-                     <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web</p>
-                  </div>
-               </div>
-            </div>
-         </div>
-      </div>
-      <!-- end our blog -->
-<?php
+        </div>
+
+
+
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+
+            <?php
 require_once("include/footer.php"); 
 ?>
