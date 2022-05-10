@@ -34,7 +34,7 @@ CREATE TABLE `PAYMENT` (
 CREATE TABLE `PREMIUM_MEMBER` (
   `Subscribtion_NO` INT(15) NOT NULL AUTO_INCREMENT,
   `SSN` INT(15) NOT NULL,
-  PRIMARY KEY (SSN),
+  PRIMARY KEY (Subscribtion_NO),
   FOREIGN KEY (SSN) REFERENCES PASSENGER(SSN)
 );
 
@@ -48,14 +48,14 @@ CREATE TABLE `AIRCRAFT` (
   `Serial_NO` INT(15) NOT NULL AUTO_INCREMENT,
   `Type` char(15) NOT NULL,
   `1st_Flight_date` date NOT NULL,
-  `Prev_maINT(15)_date` date NOT NULL,
-  `Next_maINT(15)_date` date NOT NULL,
+  `Prev_maint_date` date NOT NULL,
+  `Next_maint_date` date NOT NULL,
   
   PRIMARY KEY (`Serial_NO`)
 ); 
 
 CREATE TABLE `PLANE` (
-  `Serial_NO` INT(15) NOT NULL AUTO_INCREMENT,
+  `Serial_NO` INT(15) NOT NULL,
   `Seats_first` INT(15) NOT NULL,
   `Seats_bussines` INT(15) NOT NULL,
   `Seats_economy` INT(15) NOT NULL,

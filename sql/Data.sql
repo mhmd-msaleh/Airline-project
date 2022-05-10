@@ -6,14 +6,14 @@ INSERT INTO AIRCRAFT (Type, 1st_Flight_date, Prev_maint_date, Next_maint_date) V
 ("plane", "2020-05-12", "2021-05-12", "2022-05-12"), 
 ("plane", "2020-07-27", "2021-07-27", "2024-11-25"); 
 
-INSERT INTO PLANE (Seats_first, Seats_bussines, Seats_economy) VALUES 
-(30, 0, 50), 
-(10, 10, 70), 
-(15, 10, 110 ); 
+INSERT INTO PLANE (Serial_NO,Seats_first, Seats_bussines, Seats_economy) VALUES 
+(1, 30, 0, 50), 
+(2, 10, 10, 70);
+
 
 INSERT INTO FLIGHT (Date, Time, Destination, Departure, Plane_NO) VALUES
-("2022-10-21", "11:25:00", "New York", "Riyadh", 3), 
-("2022-10-25", "23:00:00", "Riyadh", "New York", 3), 
+("2022-10-21", "11:25:00", "New York", "Riyadh", 2), 
+("2022-10-25", "23:00:00", "Riyadh", "New York", 1), 
 ("2022-10-25", "09:30:00", "Riyadh", "New York", 1), 
 ("2022-11-03", "23:00:00", "London", "Dammam", 2); 
 

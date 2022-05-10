@@ -14,7 +14,7 @@
 // var_dump($data);  
 // print("hello man"); 
 // echo("nigga"); 
-include("../database.php"); 
+include("./database.php"); 
 $db = new Database(); 
 
 $data = $db->getFlightsTo("New York"); 

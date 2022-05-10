@@ -1,5 +1,5 @@
 <?php
-include_once("include/header.php")
+include_once("php/header.php")
 ?>
 
 <div class="container">
@@ -26,6 +26,6 @@ include_once("include/header.php")
 </div>
 
 <?php
-include_once("include/footer.php")
+include_once("php/footer.php")
 ?>
 

@@ -39,3 +39,9 @@ WHERE User_id = (
     WHERE Username = ?
     AND Password = ? 
 );
+
+--  GET USER ID 
+SELECT ID 
+FROM USER
+WHERE Username =? 
+AND Password =?; 

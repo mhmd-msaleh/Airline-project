@@ -9,7 +9,7 @@ class Database{
         $host = "localhost";
         $user = "root";
         $password = ""; 
-        $database = "air-line1213131"; 
+        $database = "airline"; 
         $this->connection = new mysqli($host, $user, $password, $database); 
         // print_r(this->$connection)
         if(this->connection->connect_error){
@@ -46,6 +46,14 @@ class Database{
         return execQurey($sql, "POST"); 
     }
 
+    public function getUserID($username, $password){
+        $sql = "SELECT ID 
+        FROM USER
+        WHERE Username ='$username' 
+        AND Password ='$password'; "; 
+
+        return execQurey($sql, "GET"); 
+    }
     public function getUserData(array $user_object, $isPassenger){  // Sign in 
         $username = $user_object["username"]; 
         $password = $user_object["password"]; 
