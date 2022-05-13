@@ -18,7 +18,7 @@ $ssn = "";
 $name =""; 
 $dob = ""; 
 $gender =""; 
-$Phone = ""; 
+$phone = ""; 
 $email = ""; 
 if(isset($_COOKIE["user_data"])){ 
     $user_data = json_decode($_COOKIE["user_data"]);
@@ -38,7 +38,7 @@ if(isset($_COOKIE["user_data"])){
     <div class="container-fluid !direction !spacing">
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
             <div class="col-6 ">
-                <form name="booking-form" action="booking/check_passenger_info.php" method="post">
+                <form name="booking-form" action="check_passenger_info.php" method="post">
                     <div class="mb-3">
                         <label for="ssn" class="form-label">SSN</label>
                         <input type="text" name="SSN" class="form-control" id="ssn" value="<?php echo($ssn); ?>" required>

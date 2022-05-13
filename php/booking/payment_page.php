@@ -1,5 +1,5 @@
 <?php
-setcookie("seat_no", $_POST["Seat_NO"], 0, "/php/booking/"); 
+setcookie("seat_no", $_GET["Seat_NO"]); 
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -82,9 +82,9 @@ setcookie("seat_no", $_POST["Seat_NO"], 0, "/php/booking/");
                                                 </label> <input type="text" required class="form-control"> </div>
                                         </div>
                                     </div>
-                                    <div class="card-footer"> <button type="button"
-                                            class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment
-                                        </button>
+                                    <div class="card-footer"> <input type="submit"
+                                            class="subscribe btn btn-primary btn-block shadow-sm" value="Confirm Payment">
+                                        
                                 </form>
                             </div>
                         </div> <!-- End -->

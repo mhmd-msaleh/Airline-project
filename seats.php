@@ -1,13 +1,3 @@
-<?php 
-// form with post method
-require("../database.php"); 
-$db = new Database(); 
-$flight_NO = $_COOKIE["flight_no"]; 
-$class = $_COOKIE["class"]; 
-$avail_seats = $db->getAvailableSeats((int) $flight_NO, $class, 'available'); 
-
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,15 +21,14 @@ $avail_seats = $db->getAvailableSeats((int) $flight_NO, $class, 'available');
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Select available seat</h5>
-                        <form method="get" action="payment_page.php"> 
-                        <select class="custom-select" multiple name="Seat_NO">
-                            <option selected>Available seats</option>
-                            <?php foreach($avail_seats as $row): $i = $row["Seat_NO"];?>
-                            <option value="<?php echo($row["Seat_NO"])?>"><?php echo($row["Seat_NO"])?></option>
-                            <?php endforeach; ?>
-                        </select>
-                        <div> <input type="submit" class="btn btn-primary" value="Submit"> </div>
-                        </form>
+                        <select class="custom-select" multiple>
+  <option selected>Available seats</option>
+  <option value="1">1</option>
+  <option value="2">2</option>
+  <option value="3">3</option>
+</select>
+                        <div> <a href="#" class="btn btn-primary">Confirm</a> </div>
+
                     </div>
                 </div>
             </div>
@@ -51,5 +40,3 @@ $avail_seats = $db->getAvailableSeats((int) $flight_NO, $class, 'available');
 </body>
 
 </html>
-
-// header("Location: payment_page.php");
