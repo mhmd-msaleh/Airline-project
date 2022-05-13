@@ -17,8 +17,6 @@ include_once("php/header.php");
                         <input class="form-control" placeholder="username1234" type="text" name="Username">
                         <label >Password</label>
                         <input class="form-control" placeholder="*********" type="text" name="Password">
-                        <label >Repeat Password</label>
-                        <input class="form-control" placeholder="*********" type="text" name="password-repeat">
                         <input class="btn" type="submit" value="Sign UP">
                     </div>
                 </div>

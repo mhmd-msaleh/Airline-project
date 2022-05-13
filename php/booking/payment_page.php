@@ -1,5 +1,5 @@
 <?php
-setcookie("seat_no", $_POST["Seat_NO"], 0, "/php/booking/"); 
+setcookie("seat_no", $_GET["Seat_NO"], 0, "/php/booking/"); 
 ?> 
 <!DOCTYPE html>
 <html lang="en">

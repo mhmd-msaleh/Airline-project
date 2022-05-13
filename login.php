@@ -4,7 +4,6 @@ include_once("php/header.php")
 
 <div class="container">
     <form id="myForm" class="main-form" method="POST" name="login_form" action=php/authenticate.php>
-        <h3>Find Your Flight</h3>
         <div class="row">
             <div class="col-sm-3">
                 <div class="container">
