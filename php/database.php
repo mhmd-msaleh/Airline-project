@@ -24,7 +24,7 @@ class Database{
             return mysqli_fetch_all($query_result, MYSQLI_ASSOC); 
         }
         elseif($query_type === "POST"){
-            return mysqli_query($this->connection, $sql_query); 
+            return  mysqli_query($this->connection, $sql_query); 
         }
     }
     /*********** User Functionalities **************/
@@ -67,9 +67,9 @@ class Database{
         return $this->execQurey($sql, "GET"); 
     }
 
-    public function addPassenger($ssn, $name, $dob, $gender, $phone, $email){
-        $sql = "INSERT INTO PASSENGER
-        VALUES ($ssn, $name, $dob, $gender, $phone, $email);  "; 
+    public function addPassenger($ssn, $name, $dob, $gender, $phone){
+        $sql = "INSERT INTO PASSENGER (`SSN`, `Name`, `DoB`, `Gender`, `Phone`)
+        VALUES ($ssn, $name, $dob, $gender, $phone);"; 
         return $this->execQurey($sql, "POST"); 
     }
 
