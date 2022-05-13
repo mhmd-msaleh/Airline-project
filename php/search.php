@@ -9,7 +9,7 @@ if(isset($_GET)){
     $date = $_GET["Date"]; 
 
     $query_flights_result = $db->getFlights($date, $destination, $departure); 
-    echo(json_encode($query_flights_result)); 
+    print_r($query_flights_result); 
 }
 
 ?>
@@ -29,24 +29,28 @@ if(isset($_GET)){
 
 <body>
     <div class="container-fluid !direction !spacing">
+        <?php foreach($query_flights_result as $table_row): ?>
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
             <div class="col-8  ">
                 <div class="card">
-                    <div class="card-header">
-                        Featured
-                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Special title treatment</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                        <a href="#" class="btn btn-primary">Book Flight</a>
+                        <form name="flight-<?php echo($table_row["Flight_NO"]); ?>"action="booking/booking_page.php" method="Get">
+                            <h5 class="card-title"><?php echo($table_row["Destination"]);?> ==> <?php echo($table_row["Departure"]);?></h5> 
+                            <p class="card-text">Date: <?php echo($table_row["Date"]);?> 
+                            </p>
+                            <p class="card-text">Time: <?php echo($table_row["Time"]);?>
+                            </p>
+                            <input type="hidden" value="<?php echo($table_row["Flight_NO"]); ?>" name="flight-id">
+                            <input type="submit" value="Book Flight" class="btn btn-primary">
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        <?php endforeach; ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
     </script>
 </body>
-
 </html>

@@ -26,3 +26,5 @@ INSERT INTO PASSENGER (SSN, Name, DoB, Gender, Phone, Email, User_id) VALUES
 (123456789, "Mohammed Ahmad", "2000-05-01", "M", "0541234567", "moh@gmail.com", 1), 
 (111111111, "Saleh Khalid", "1991-06-12", "M", "0579876483", "sal1234@gmail.com", 2); 
 
+INSERT INTO `seat` (`Seat_NO`, `Price`, `Status`, `Class`, `Plane_NO`, `Flight_NO`)
+VALUES ('1', '1000', 'available', 'economy', '1', '1');
