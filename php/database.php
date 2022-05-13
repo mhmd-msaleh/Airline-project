@@ -88,10 +88,10 @@ class Database{
 
     public function getAvailableSeats($flight_no, $class){
         $sql = "SELECT Seat_NO, Price
-        FROM SEAT
-        WHERE Flight_NO = $flight_no
-        AND Status = 'available'
-        AND Class = $class; "; 
+        FROM `SEAT`
+        WHERE `Flight_NO` = $flight_no
+        AND `Status` = 'available'
+        AND `Class` = $class"; 
         return $this->execQurey($sql, "GET"); 
     }
 

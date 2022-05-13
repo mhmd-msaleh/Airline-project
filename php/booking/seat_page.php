@@ -4,7 +4,7 @@ require("../database.php");
 $db = new Database(); 
 $flight_NO = $_COOKIE["flight_no"]; 
 $class = $_COOKIE["class"]; 
-$avail_seats = $db->getAvailableSeats($flight_NO, $class); 
+$avail_seats = $db->getAvailableSeats((int) $flight_NO, $class); 
 ?>
 
 <!DOCTYPE html>
