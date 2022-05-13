@@ -25,7 +25,7 @@ if(isset($_POST)){
         $query_data_result = $db->getUserData($id); 
         if(!empty($query_data_result)){
             $user_data = json_encode($query_data_result[0]); 
-            setcookie("user_data", $user_data, 0, '/'); 
+            setcookie("user_data", $user_data); 
         }
         header("Location: home.php"); 
     }

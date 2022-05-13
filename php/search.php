@@ -7,7 +7,7 @@ if(isset($_GET)){
     $destination = $_GET["Destination"]; 
     $departure = $_GET["Departure"]; 
     $date = $_GET["Date"]; 
-    setcookie("class",  $_GET["Class"], 0, "/php/booking"); 
+    setcookie("class",  $_GET["Class"]); 
 
     $query_flights_result = $db->getFlights($date, $destination, $departure);
     if(empty($query_flights_result)){
