@@ -19,34 +19,30 @@
 
 
     <header>
+        
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-3 col logo_section">
-                        <div class="full">
-                            <div class="center-desk">
-                                <div class="logo"> <a href="index.php"><img src="images/logo.jpg" alt="#" class="logom"></a> </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-xl-9 col-lg-9 col-md-9 col-sm-9">
-                        <div class="menu-area">
-                            <div class="limit-box">
-                                <nav class="main-menu">
-                                    <ul class="menu-area-main">
-                                        <li> <a href="index.php">Home</a> </li>
-                                        <li> <a href="#about">About</a> </li>
-                                        <li><a href="#travel">Travel</a></li>
-                                        <li><a href="#contact">Contact Us</a></li>
-                                        <li><a href="signup.php">Signup</a> </li>
-                                        <li><a href="login.php">Login</a></li>
-                                    </ul>
-                                </nav>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end header inner -->
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="index.php">Airline</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                      <span class="navbar-toggler-icon"></span>
+                </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav">
+      <li class="nav-item active">
+        <a class="nav-link" href="index.php">Home </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#about">About</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#travel">Travel</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#contact">Contact Us</a>
+      </li>
+      <li class="nav-item"><a class="nav-link" href="signup.php">Signup</a> </li>
+        <li class="nav-item"><a class="nav-link" href="login.php">Login</a></li>
+    </ul>
+  </div>
+</nav>
     </header>
