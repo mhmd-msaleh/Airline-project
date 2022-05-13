@@ -3,7 +3,6 @@ require("../database.php");
 $db = new Database(); 
 $ssn; 
 $flight_id = $_POST["flight-id"]; 
-print_r($_POST); 
 if(isset($_COOKIE["user_data"])){
     $ssn=json_decode($_COOKIE["user_data"])->SSN; 
 }
@@ -15,7 +14,11 @@ else{
     $gender = $_POST["Gender"]; 
     $phone = $_POST["Phone"]; 
     $email = $_POST["Email"]; 
-    $db->addPassenger($ssn, $name, $dob, $gender, $phone, $email); 
+    $status = $db->addPassenger($ssn, $name, $dob, $gender, $phone, $email); 
+    if($status){
+        print("passenger is added");
+    }
+    var_dump($status); 
 }
 // now we can make book the ticket with the flight_no and ssn
 setcookie("passenger_ssn", $ssn); 
@@ -23,6 +26,6 @@ setcookie("flight_no", $flight_id);
 
 print_r($ssn); 
 var_dump($flight_id); 
-header("Location: ./seat_page.php"); 
+// header("Location: ./seat_page.php"); 
 
 

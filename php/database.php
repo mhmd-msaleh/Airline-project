@@ -69,7 +69,6 @@ class Database{
 
     public function addPassenger($ssn, $name, $dob, $gender, $phone, $email){
         $sql = "INSERT INTO PASSENGER
-        (SSN, Name, Dob, Gender, Phone, Email)
         VALUES ($ssn, $name, $dob, $gender, $phone, $email);  "; 
         return $this->execQurey($sql, "POST"); 
     }
@@ -90,8 +89,7 @@ class Database{
         $sql = "SELECT Seat_NO, Price
         FROM `SEAT`
         WHERE `Flight_NO` = $flight_no
-        AND `Status` = 'available'
-        AND `Class` = $class"; 
+        AND `Status` = 'available'"; 
         return $this->execQurey($sql, "GET"); 
     }
 
@@ -112,18 +110,21 @@ class Database{
      * @return ticket_NO 
      */
     public function makeBooking($ssn, $payment_no, $seat_no, $flight_no){
-        $sql = "INSERT INTO BOOKING VLAUES (null, $ssn, $payment_no, $seat_no, $flight_no); "; 
-        $this->execQurey($sql, "POST");
-        $sql = "SELECT FROM TICKET WHERE Flight_NO = $flight_no AND Seat_NO = $seat_no; "; 
-        return $this->execQurey($sql, "GET"); 
+        $sql = "INSERT INTO BOOKING 
+        (`SSN`, `Payment_NO`, `Seat_NO`, `Flight_NO`)
+        VALUES ($ssn, $payment_no, $seat_no, $flight_no);"; 
+        return $this->execQurey($sql, "POST");
+        // $sql = "SELECT FROM TICKET WHERE Flight_NO = $flight_no AND Seat_NO = $seat_no; "; 
+        // return $this->execQurey($sql, "GET"); 
 
 
     }
 
     public function makePayment($amount, $card_no){
         $sql = "INSERT INTO `PAYMENT` (`Amount`, `Card_NO`) 
-        VALUES ('$amount', '$card_no');
-        SELECT payment_NO FROM payment ORDER BY payment_NO DESC LIMIT 1;"; 
+        VALUES ('$amount', '$card_no');";
+        $this->execQurey($sql, "POST"); 
+        $sql = "SELECT payment_NO FROM payment ORDER BY payment_NO DESC LIMIT 1;"; 
         return $this->execQurey($sql, "GET"); 
     }
 

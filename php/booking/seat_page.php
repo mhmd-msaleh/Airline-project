@@ -4,7 +4,8 @@ require("../database.php");
 $db = new Database(); 
 $flight_NO = $_COOKIE["flight_no"]; 
 $class = $_COOKIE["class"]; 
-$avail_seats = $db->getAvailableSeats((int) $flight_NO, $class); 
+$avail_seats = $db->getAvailableSeats((int) $flight_NO, $class, 'available'); 
+
 ?>
 
 <!DOCTYPE html>
@@ -30,11 +31,11 @@ $avail_seats = $db->getAvailableSeats((int) $flight_NO, $class);
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Select available seat</h5>
-                        <form method="get" action="payment_page"> 
+                        <form method="get" action="payment_page.php"> 
                         <select class="custom-select" multiple name="Seat_NO">
                             <option selected>Available seats</option>
-                            <?php foreach($array as $row): $i = $row["Seat_NO"];?>
-                            <option value="<?php echo($i)?>"><?php echo($i)?></option>
+                            <?php foreach($avail_seats as $row): $i = $row["Seat_NO"];?>
+                            <option value="<?php echo($row["Seat_NO"])?>"><?php echo($row["Seat_NO"])?></option>
                             <?php endforeach; ?>
                         </select>
                         <div> <input type="submit" class="btn btn-primary" value="Submit"> </div>
