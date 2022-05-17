@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,7 @@
   <h5 class="card-header">Active Flights</h5>
   <div class="card-body">
     <h5 class="card-title">To show all current active flights</h5>
-    <a href="flights.php" class="btn btn-primary">Search</a>
+    <a href="admin/active_flight.php" class="btn btn-primary">Search</a>
   </div>
 </div>
 

@@ -1,3 +1,12 @@
+<?php 
+require("../database.php"); 
+$db = new DataBase()
+
+$query_flights_result = $db->getActiveFlight(); 
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -12,26 +21,25 @@
 </head>
 
 <body>
-    <div class="container-fluid !direction !spacing">
+<div class="container-fluid !direction !spacing">
+        <?php 
+        foreach($query_flights_result as $table_row): ?>
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
             <div class="col-8  ">
                 <div class="card">
-                    <div class="card-header">
-                        Flight
-                    </div>
                     <div class="card-body">
-                        <h5 class="card-title">Select flight</h5>
-                        <select class="custom-select" multiple>
-  <option selected>Open this select menu</option>
-  <option value="1">One</option>
-  <option value="2">Two</option>
-  <option value="3">Three</option>
-</select>
-                        <a href="#" class="btn btn-primary">Search</a>
+                    <h5 class="card-title">Flight Number: <?php echo($table_row["Flight_NO"]); ?></h5>
+                            <h5 class="card-subtitle mb-2"><?php echo($table_row["Destination"]);?> ==> <?php echo($table_row["Departure"]);?></h5> 
+                            <p class="card-text">Date: <?php echo($table_row["Date"]);?> 
+                            </p>
+                            <p class="card-text">Time: <?php echo($table_row["Time"]);?>
+                            </p>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
+        <?php endforeach; ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">
