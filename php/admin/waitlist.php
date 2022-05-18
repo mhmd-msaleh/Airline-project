@@ -1,9 +1,8 @@
 <?php 
 require("../database.php"); 
 $db = new DataBase(); 
-
-$query_flights_result = $db->getActiveFlight(); 
-
+$flight_no = $_GET["flight_no"]; 
+$query_result = $db->getWaitlistPassengers($flight_no); 
 ?>
 
 
@@ -21,19 +20,19 @@ $query_flights_result = $db->getActiveFlight();
 </head>
 
 <body>
-<div class="container-fluid !direction !spacing">
+    <div class="container-fluid !direction !spacing">
         <?php 
-        foreach($query_flights_result as $table_row): ?>
+        foreach($query_result as $table_row): ?>
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
             <div class="col-8  ">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Flight Number: <?php echo($table_row["Flight_NO"]); ?></h5>
-                            <h5 class="card-subtitle mb-2"><?php echo($table_row["Destination"]);?> ==> <?php echo($table_row["Departure"]);?></h5> 
-                            <p class="card-text">Date: <?php echo($table_row["Date"]);?> 
-                            </p>
-                            <p class="card-text">Time: <?php echo($table_row["Time"]);?>
-                            </p>
+                        <h5 class="card-title">Passenger Name: <?php echo($table_row["Name"]); ?></h5>
+                        <h5 class="card-subtitle mb-2">SSN: <?php echo($table_row["SSN"]);?></h5>
+                        <p class="card-text">Seat Number: <?php echo($table_row["Flight_NO"]);?>
+                        </p>
+                        <p class="card-text">Flight Number: <?php echo($table_row["Seat_NO"]);?>
+                        </p>
                         </form>
                     </div>
                 </div>

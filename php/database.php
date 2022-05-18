@@ -20,8 +20,14 @@ class Database{
 
     private function execQurey($sql_query, $query_type){
         if($query_type === "GET"){
-            $query_result = mysqli_query($this->connection, $sql_query); 
-            return mysqli_fetch_all($query_result, MYSQLI_ASSOC); 
+            $query_result = mysqli_query($this->connection, $sql_query);
+            if($query_result){ 
+                return mysqli_fetch_all($query_result, MYSQLI_ASSOC);
+            }
+            else{
+                return mysqli_error($this->connection); 
+            }
+
         }
         elseif($query_type === "POST"){
             return  mysqli_query($this->connection, $sql_query); 
@@ -147,7 +153,7 @@ class Database{
     /********* Report queries **************/
 
     public function getActiveFlight(){
-        $sql = "SELECT * FROM FLIGHT WHERE Date = current_date and Time >= current_time;"; 
+        $sql = "SELECT * FROM FLIGHT WHERE Date = current_date;"; 
         return $this->execQurey($sql, "GET"); 
     }
 
@@ -156,13 +162,84 @@ class Database{
         return $this->execQurey($sql, "GET"); 
     }
 
+    public function getCancelledTicket(){
+        $sql = "SELECT * FROM log_cancel_ticket; "; 
+        return $this->execQurey($sql, "GET"); 
+    }
     
+    public function getWaitlistPassengers($flight_no){
+        $sql = "SELECT p.SSN, Name, Flight_NO, Seat_NO 
+        FROM PASSENGER p, BOOKING b 
+        WHERE p.SSN = b.SSN 
+        AND b.Flight_NO = $flight_no 
+        AND b.Seat_NO IN ( 
+            SELECT Seat_NO 
+            FROM SEAT 
+            WHERE Status = 'waitlist' 
+        );"; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    public function getConfirmedPayments(){
+        $sql = "SELECT * FROM PAYMENT WHERE Confirmed = 1;"; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    public function getPercentBooking($date){
+        $sql = "SELECT Flight_NO, Used_seats,
+                (`Seats_first`+`Seats_bussines`+`Seats_economy`) as Total_seat
+                FROM PLANE p JOIN (
+                    SELECT Flight_NO, Plane_NO, Count(Seat_NO) as Used_seats
+                    FROM FLIGHT NATURAL JOIN BOOKING
+                    WHERE Date = '$date'
+                    group by Plane_NO
+                    ) as j on p.Serial_NO = j.Plane_NO;"; 
+
+        $query_result = $this->execQurey($sql, "GET"); 
+        $outResult = array(); 
+
+        // calcualte ALF for each plane 
+        foreach($query_result as $row){
+            $percent = $row["Used_seats"]/$row["Total_seat"] *100;
+            array_push($outResult, array(
+                "flight_no" => $row["Flight_NO"], 
+                "percent" => round($percent, 0)
+            )); 
+        }
+
+        return $outResult; 
+    }
+    
+
+    // for the requirements: the average load factor is a ration for all planes
+    public function getALF($date){
+        $sql = "SELECT Serial_NO, Used_seats,
+                (`Seats_first`+`Seats_bussines`+`Seats_economy`) as Total_seat
+                FROM PLANE p JOIN (
+                    SELECT Plane_NO, Count(Seat_NO) as Used_seats
+                    FROM FLIGHT NATURAL JOIN BOOKING
+                    WHERE Date = '$date'
+                    group by Plane_NO
+                    ) as j on p.Serial_NO = j.Plane_NO;"; 
+        
+        // execting the query
+        $query_result = $this->execQurey($sql, "GET"); 
+        $outResult = array(); 
+
+        // calcualte ALF for each plane 
+        foreach($query_result as $row){
+            $alf = $row["Used_seats"]/$row["Total_seat"] *100;
+            array_push($outResult, array(
+                "plane_no" => $row["Serial_NO"], 
+                "alf" => round($alf, 0)
+            )); 
+        }
+
+        return $outResult; 
+    }
 
 
 
 
 }
-
-$db = new DataBase(); 
-// print_r($db::getFlightsTo("New York"))
 ?> 

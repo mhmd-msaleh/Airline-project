@@ -2,7 +2,7 @@
 require("../database.php"); 
 $db = new DataBase(); 
 
-$query_flights_result = $db->getActiveFlight(); 
+$query_result = $db->getCancelledTicket(); 
 
 ?>
 
@@ -22,17 +22,18 @@ $query_flights_result = $db->getActiveFlight();
 
 <body>
 <div class="container-fluid !direction !spacing">
+    <h1>Cancelled Tickets</h1>
         <?php 
-        foreach($query_flights_result as $table_row): ?>
+        foreach($query_result as $table_row): ?>
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
             <div class="col-8  ">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Flight Number: <?php echo($table_row["Flight_NO"]); ?></h5>
-                            <h5 class="card-subtitle mb-2"><?php echo($table_row["Destination"]);?> ==> <?php echo($table_row["Departure"]);?></h5> 
-                            <p class="card-text">Date: <?php echo($table_row["Date"]);?> 
+                    <h5 class="card-title">Ticket Number: <?php echo($table_row["ticket_no"]); ?></h5>
+                            
+                            <p class="card-text">From Flight: <?php echo($table_row["flight_no"]);?> 
                             </p>
-                            <p class="card-text">Time: <?php echo($table_row["Time"]);?>
+                            <p class="card-text">Seat: <?php echo($table_row["seat_no"]);?>
                             </p>
                         </form>
                     </div>
