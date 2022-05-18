@@ -25,23 +25,16 @@ $result = $db->getALF($date);
 
 <body>
 <div class="container-fluid !direction !spacing">
-    <h1>Planes on <?php echo($date); ?> are: </h1>
-        <?php 
-        foreach($result as $table_row): ?>
+    <h4>Average Load Factor for all planes on <?php echo($date); ?> :</h4>
         <div class="row ${1| ,row-cols-2,row-cols-3, auto,justify-content-md-center,|}">
             <div class="col-8  ">
                 <div class="card">
                     <div class="card-body">
-                    <h5 class="card-title">Plane Number: <?php echo($table_row["plane_no"]); ?></h5>
-                            
-                            <p class="card-text">The Average Load Factor is: <?php echo($table_row["alf"]);?>%
-                            </p>
-                        </form>
+                    <h5 class="card-title">AFL  = <?php echo($result); ?>%</h5>
                     </div>
                 </div>
             </div>
         </div>
-        <?php endforeach; ?>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous">

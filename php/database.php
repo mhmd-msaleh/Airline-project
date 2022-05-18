@@ -30,7 +30,12 @@ class Database{
 
         }
         elseif($query_type === "POST"){
-            return  mysqli_query($this->connection, $sql_query); 
+            $query_result = mysqli_query($this->connection, $sql_query); 
+            if ($query_result){
+                return $query_result;  
+            } else{
+                return mysqli_error($this->connection); 
+            }
         }
     }
     /*********** User Functionalities **************/
@@ -91,8 +96,13 @@ class Database{
         return $this->execQurey($sql, "GET"); 
     }
 
+    public function getFlightInfo($flight_no){
+        $sql = "SELECT * FROM FLIGHT WHERE Flight_NO = '$flight_no'; "; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
     public function getAvailableSeats($flight_no, $class){
-        $sql = "SELECT Seat_NO, Price
+        $sql = "SELECT Seat_NO, Price, Class
         FROM `SEAT`
         WHERE `Flight_NO` = $flight_no
         AND `Status` = 'available'"; 
@@ -169,14 +179,8 @@ class Database{
     
     public function getWaitlistPassengers($flight_no){
         $sql = "SELECT p.SSN, Name, Flight_NO, Seat_NO 
-        FROM PASSENGER p, BOOKING b 
-        WHERE p.SSN = b.SSN 
-        AND b.Flight_NO = $flight_no 
-        AND b.Seat_NO IN ( 
-            SELECT Seat_NO 
-            FROM SEAT 
-            WHERE Status = 'waitlist' 
-        );"; 
+        FROM PASSENGER p NATURAL JOIN WAITLIST w 
+        WHERE w.Flight_NO = $flight_no;"; 
         return $this->execQurey($sql, "GET"); 
     }
 
@@ -213,8 +217,8 @@ class Database{
 
     // for the requirements: the average load factor is a ration for all planes
     public function getALF($date){
-        $sql = "SELECT Serial_NO, Used_seats,
-                (`Seats_first`+`Seats_bussines`+`Seats_economy`) as Total_seat
+        $sql = "SELECT Sum(Used_seats) as Sum_usedSeats,
+                Sum((`Seats_first`+`Seats_bussines`+`Seats_economy`)) as Sum_totalSeats
                 FROM PLANE p JOIN (
                     SELECT Plane_NO, Count(Seat_NO) as Used_seats
                     FROM FLIGHT NATURAL JOIN BOOKING
@@ -224,22 +228,37 @@ class Database{
         
         // execting the query
         $query_result = $this->execQurey($sql, "GET"); 
-        $outResult = array(); 
+        $outResult = $query_result[0]["Sum_usedSeats"]/$query_result[0]["Sum_totalSeats"] * 100;  
+        return round($outResult, 0); 
+    }
 
-        // calcualte ALF for each plane 
-        foreach($query_result as $row){
-            $alf = $row["Used_seats"]/$row["Total_seat"] *100;
-            array_push($outResult, array(
-                "plane_no" => $row["Serial_NO"], 
-                "alf" => round($alf, 0)
-            )); 
-        }
+    public function deleteTicket($ticket_no){
+        $sql = "DELETE FROM TICKET WHERE T_NO = '$ticket_no'; "; 
+        return $this->execQurey($sql, "POST"); 
+    
+    }
 
-        return $outResult; 
+    public function getPassengerTickets($ssn){
+        $sql = "SELECT y.T_NO, f.Flight_NO, f.Destination, f.Departure, f.Date, y.Seat_NO
+                FROM FLIGHT f JOIN (
+                    SELECT T_NO, t.Flight_NO, t.Seat_NO  
+                    FROM TICKET t JOIN BOOKING b 
+                    ON (t.Flight_NO = b.Flight_NO and t.Seat_NO = b.Seat_NO) 
+                    WHERE SSN = '$ssn'
+                ) 
+                as y ON f.Flight_NO = y.Flight_NO;"; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    // public function getFlightOfTicket($ticket_no){
+    //     $sql 
+    // }
+
+    public function updateTicketFlight($ticket, $flight, $seat){
+        $sql = "UPDATE TICKET SET Flight_NO = '$flight' AND Seat_NO = '$seat' WHERE T_NO = '$ticket'; "; 
+        return $this->execQurey($sql, "POST"); 
     }
 
 
-
-
 }
-?> 
+?>
