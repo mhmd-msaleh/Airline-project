@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2022 at 07:20 AM
+-- Generation Time: May 19, 2022 at 03:48 PM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -98,7 +98,9 @@ CREATE TABLE `booking` (
 
 INSERT INTO `booking` (`Booking_ref`, `SSN`, `Payment_NO`, `Flight_NO`, `Seat_NO`) VALUES
 (2, 111111111, 2, 8, 1),
-(3, 1718178170, 3, 0, 1);
+(8, 123456789, 4, 0, 2),
+(3, 1718178170, 3, 9, 1),
+(9, 1718178170, 5, 1, 3);
 
 --
 -- Triggers `booking`
@@ -106,11 +108,6 @@ INSERT INTO `booking` (`Booking_ref`, `SSN`, `Payment_NO`, `Flight_NO`, `Seat_NO
 DELIMITER $$
 CREATE TRIGGER `booking_insertion` AFTER DELETE ON `booking` FOR EACH ROW INSERT INTO BOOKING (SSN, Payment_NO, Flight_NO, Seat_NO) 
 SELECT SSN, Payment_NO, Flight_NO, Seat_NO FROM waitlist order by ID DESC LIMIT 1
-$$
-DELIMITER ;
-DELIMITER $$
-CREATE TRIGGER `log_new_booking` AFTER INSERT ON `booking` FOR EACH ROW INSERT INTO log_booking (Booking_ref) 
-values (NEW.Booking_ref)
 $$
 DELIMITER ;
 DELIMITER $$
@@ -158,8 +155,8 @@ INSERT INTO `flight` (`Flight_NO`, `Date`, `Time`, `Destination`, `Departure`, `
 (1, '2022-10-21', '11:25:00', 'New York', 'Riyadh', 2),
 (3, '2022-10-21', '09:30:00', 'Riyadh', 'New York', 1),
 (4, '2022-11-03', '23:00:00', 'London', 'Dammam', 2),
-(5, '2022-05-17', '17:19:23', 'Tokyo ', 'Dammam', 2),
-(6, '2022-05-17', '17:19:23', 'Dammam', 'Jeddah', 1),
+(5, '2022-05-19', '14:19', 'Tokyo ', 'Dammam', 2),
+(6, '2022-05-19', '12:35', 'Dammam', 'Jeddah', 1),
 (7, '2022-10-21', '20:31:34', 'Abha', 'Madinah', 3),
 (8, '2022-10-21', '20:31:34', 'Qatar', 'Dammam', 4),
 (9, '2022-10-21', '20:32:25', 'Bahrain', 'Oman', 5);
@@ -195,26 +192,6 @@ INSERT INTO `log_cancel_ticket` (`ticket_no`, `flight_no`, `seat_no`) VALUES
 (6, 8, 1),
 (5, 9, 1),
 (2, 1, 1);
-
--- --------------------------------------------------------
-
---
--- Table structure for table `log_seat`
---
-
-CREATE TABLE `log_seat` (
-  `Log_id` int(15) NOT NULL,
-  `Plane` int(15) NOT NULL,
-  `Seat` int(15) NOT NULL,
-  `Time` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `log_seat`
---
-
-INSERT INTO `log_seat` (`Log_id`, `Plane`, `Seat`, `Time`) VALUES
-(2, 1, 2, '2022-05-11 13:06:25');
 
 -- --------------------------------------------------------
 
@@ -284,11 +261,11 @@ CREATE TABLE `plane` (
 --
 
 INSERT INTO `plane` (`Serial_NO`, `Seats_first`, `Seats_bussines`, `Seats_economy`) VALUES
-(1, 3, 0, 5),
-(2, 3, 3, 7),
-(3, 6, 2, 6),
-(4, 3, 3, 6),
-(5, 7, 8, 5);
+(1, 3, 3, 5),
+(2, 3, 3, 5),
+(3, 3, 3, 5),
+(4, 3, 3, 5),
+(5, 3, 3, 5);
 
 -- --------------------------------------------------------
 
@@ -331,11 +308,11 @@ CREATE TABLE `seat` (
 
 INSERT INTO `seat` (`Flight_NO`, `Seat_NO`, `Price`, `Status`, `Class`) VALUES
 (1, 1, 1000, 'available', 'first'),
-(8, 1, 1234, 'available', 'first'),
-(9, 1, 1287, 'available', 'first'),
+(8, 1, 1234, 'ocuppied', 'first'),
+(9, 1, 1287, 'occupied', 'first'),
 (1, 2, 500, 'available', 'economy'),
 (8, 2, 1234, 'available', 'first'),
-(1, 3, 500, 'available', 'economy'),
+(1, 3, 500, 'occupied', 'economy'),
 (8, 3, 1234, 'available', 'first'),
 (1, 4, 500, 'available', 'economy'),
 (8, 4, 1234, 'available', 'first'),
@@ -360,7 +337,9 @@ CREATE TABLE `ticket` (
 
 INSERT INTO `ticket` (`T_NO`, `Wieght`, `Flight_NO`, `Seat_NO`) VALUES
 (4, 7, 8, 1),
-(7, 10, 0, 1);
+(7, 10, 9, 1),
+(9, 7, 0, 2),
+(10, 7, 1, 3);
 
 --
 -- Triggers `ticket`
@@ -416,8 +395,8 @@ CREATE TABLE `waitlist` (
   `ID` int(15) NOT NULL,
   `SSN` int(15) NOT NULL,
   `Flight_NO` int(15) NOT NULL,
-  `Seat_NO` int(15) NOT NULL,
-  `Payment_NO` int(15) NOT NULL
+  `Seat_NO` int(15) DEFAULT NULL,
+  `Payment_NO` int(15) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -479,12 +458,6 @@ ALTER TABLE `helicopter`
 ALTER TABLE `log_cancel_ticket`
   ADD KEY `flight_no` (`flight_no`),
   ADD KEY `seat_no` (`seat_no`);
-
---
--- Indexes for table `log_seat`
---
-ALTER TABLE `log_seat`
-  ADD PRIMARY KEY (`Log_id`);
 
 --
 -- Indexes for table `passenger`
@@ -549,7 +522,6 @@ ALTER TABLE `waitlist`
   ADD PRIMARY KEY (`ID`),
   ADD UNIQUE KEY `SSN` (`SSN`,`Flight_NO`,`Seat_NO`),
   ADD KEY `Flight_NO` (`Flight_NO`),
-  ADD KEY `Seat_NO` (`Seat_NO`),
   ADD KEY `Payment_NO` (`Payment_NO`);
 
 --
@@ -572,19 +544,13 @@ ALTER TABLE `bag`
 -- AUTO_INCREMENT for table `booking`
 --
 ALTER TABLE `booking`
-  MODIFY `Booking_ref` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Booking_ref` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `flight`
 --
 ALTER TABLE `flight`
   MODIFY `Flight_NO` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT for table `log_seat`
---
-ALTER TABLE `log_seat`
-  MODIFY `Log_id` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `payment`
@@ -602,7 +568,7 @@ ALTER TABLE `premium_member`
 -- AUTO_INCREMENT for table `ticket`
 --
 ALTER TABLE `ticket`
-  MODIFY `T_NO` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `T_NO` int(15) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `user`
@@ -685,12 +651,17 @@ ALTER TABLE `seat`
   ADD CONSTRAINT `seat_ibfk_2` FOREIGN KEY (`Flight_NO`) REFERENCES `flight` (`Flight_NO`);
 
 --
+-- Constraints for table `ticket`
+--
+ALTER TABLE `ticket`
+  ADD CONSTRAINT `seat_const_ibk1` FOREIGN KEY (`Flight_NO`,`Seat_NO`) REFERENCES `seat` (`Flight_NO`, `Seat_NO`);
+
+--
 -- Constraints for table `waitlist`
 --
 ALTER TABLE `waitlist`
   ADD CONSTRAINT `waitlist_ibfk_1` FOREIGN KEY (`SSN`) REFERENCES `passenger` (`SSN`),
   ADD CONSTRAINT `waitlist_ibfk_2` FOREIGN KEY (`Flight_NO`) REFERENCES `seat` (`Flight_NO`),
-  ADD CONSTRAINT `waitlist_ibfk_3` FOREIGN KEY (`Seat_NO`) REFERENCES `seat` (`Seat_NO`),
   ADD CONSTRAINT `waitlist_ibfk_4` FOREIGN KEY (`Payment_NO`) REFERENCES `payment` (`Payment_NO`);
 COMMIT;
 

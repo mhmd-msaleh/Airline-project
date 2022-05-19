@@ -178,7 +178,7 @@ class Database{
     }
     
     public function getWaitlistPassengers($flight_no){
-        $sql = "SELECT p.SSN, Name, Flight_NO, Seat_NO 
+        $sql = "SELECT p.SSN, Name, Flight_NO 
         FROM PASSENGER p NATURAL JOIN WAITLIST w 
         WHERE w.Flight_NO = $flight_no;"; 
         return $this->execQurey($sql, "GET"); 
@@ -256,6 +256,13 @@ class Database{
 
     public function updateTicketFlight($ticket, $flight, $seat){
         $sql = "UPDATE TICKET SET Flight_NO = '$flight' AND Seat_NO = '$seat' WHERE T_NO = '$ticket'; "; 
+        return $this->execQurey($sql, "POST"); 
+    }
+
+    public function promoteWaitlist($ssn, $flight ){
+        $sql = "INSERT INTO WAITLIST (SSN, Flight_NO) VALUES (
+            '$ssn', '$flight'); "; 
+
         return $this->execQurey($sql, "POST"); 
     }
 

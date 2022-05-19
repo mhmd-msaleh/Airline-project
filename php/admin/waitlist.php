@@ -35,7 +35,6 @@ if(empty($query_result)){
                         <h5 class="card-subtitle mb-2">SSN: <?php echo($table_row["SSN"]);?></h5>
                         <p class="card-text">Flight Number: <?php echo($table_row["Flight_NO"]);?>
                         </p>
-                        <p class="card-text">Seat Number: <?php echo($table_row["Seat_NO"]);?>
                         </p>
                         </form>
                     </div>
