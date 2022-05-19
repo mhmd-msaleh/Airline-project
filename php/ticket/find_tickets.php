@@ -3,9 +3,12 @@
 require("../database.php"); 
 
 $db = new Database(); 
-$ssn = $_POST["ssn"]; 
+$ssn = $_POST["ssn"];  
 $tickets = $db->getPassengerTickets($ssn); 
-
+// print_r($tickets); 
+if(empty($tickets)){
+    echo("There are no current tickets for this passenger right now!"); 
+}
 ?>
 
 <!DOCTYPE html>

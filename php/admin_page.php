@@ -17,7 +17,7 @@
         <div class="card-body">
             <!-- <h5 class="card-title">To book flights directly</h5> -->
             <a href="../booking.php" class="btn btn-primary">Book new ticket</a>
-            <a href="../booking.php" class="btn btn-secondary">Modify ticket</a>
+            <a href="admin/update_form.php" class="btn btn-secondary">Modify ticket</a>
             <a href="ticket/delete_form.php" class="btn btn-danger">Delete ticket</a>
         </div>
     </div>
