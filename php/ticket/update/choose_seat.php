@@ -1,10 +1,11 @@
 <?php 
 // form with post method
-require("../database.php"); 
+require("../../database.php"); 
 $db = new Database(); 
-$flight_NO = $_COOKIE["flight_no"]; 
-$class = $_COOKIE["class"]; 
-$avail_seats = $db->getAvailableSeats((int) $flight_NO, $class, 'available'); 
+$flight_NO = $_GET["flight_no"]; 
+// $class = $_POST["class"]; 
+$avail_seats = $db->getAvailableSeats($flight_NO, 'class'); 
+// print_r($avail_seats); 
 
 ?>
 
@@ -31,13 +32,14 @@ $avail_seats = $db->getAvailableSeats((int) $flight_NO, $class, 'available');
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Select available seat</h5>
-                        <form method="get" action="payment_page.php">
+                        <form method="post" action="submit_update_flight.php">
                             <select class="custom-select" multiple name="Seat_NO">
                                 <option selected>Available seats</option>
                                 <?php foreach($avail_seats as $row): $i = $row["Seat_NO"];?>
-                                <option value="<?php echo($row["Seat_NO"])?>"><?php echo($row["Seat_NO"])?></option>
+                                <option value="<?php echo($row["Seat_NO"])?>"><?php echo($row["Seat_NO"]." -- ".$row["Class"]." -- ".$row["Price"]."SAR")?></option>
                                 <?php endforeach; ?>
                             </select>
+                            <input type="hidden" name="flight_no" value="<?php echo($flight_NO); ?>">
                             <div> <input type="submit" class="btn btn-primary" value="Submit"> </div>
                         </form>
                     </div>

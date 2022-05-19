@@ -20,11 +20,22 @@ class Database{
 
     private function execQurey($sql_query, $query_type){
         if($query_type === "GET"){
-            $query_result = mysqli_query($this->connection, $sql_query); 
-            return mysqli_fetch_all($query_result, MYSQLI_ASSOC); 
+            $query_result = mysqli_query($this->connection, $sql_query);
+            if($query_result){ 
+                return mysqli_fetch_all($query_result, MYSQLI_ASSOC);
+            }
+            else{
+                return mysqli_error($this->connection); 
+            }
+
         }
         elseif($query_type === "POST"){
-            return  mysqli_query($this->connection, $sql_query); 
+            $query_result = mysqli_query($this->connection, $sql_query); 
+            if ($query_result){
+                return $query_result;  
+            } else{
+                return mysqli_error($this->connection); 
+            }
         }
     }
     /*********** User Functionalities **************/
@@ -85,8 +96,13 @@ class Database{
         return $this->execQurey($sql, "GET"); 
     }
 
+    public function getFlightInfo($flight_no){
+        $sql = "SELECT * FROM FLIGHT WHERE Flight_NO = '$flight_no'; "; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
     public function getAvailableSeats($flight_no, $class){
-        $sql = "SELECT Seat_NO, Price
+        $sql = "SELECT Seat_NO, Price, Class
         FROM `SEAT`
         WHERE `Flight_NO` = $flight_no
         AND `Status` = 'available'"; 
@@ -147,7 +163,7 @@ class Database{
     /********* Report queries **************/
 
     public function getActiveFlight(){
-        $sql = "SELECT * FROM FLIGHT WHERE Date = current_date and Time >= current_time;"; 
+        $sql = "SELECT * FROM FLIGHT WHERE Date = current_date;"; 
         return $this->execQurey($sql, "GET"); 
     }
 
@@ -156,13 +172,93 @@ class Database{
         return $this->execQurey($sql, "GET"); 
     }
 
+    public function getCancelledTicket(){
+        $sql = "SELECT * FROM log_cancel_ticket; "; 
+        return $this->execQurey($sql, "GET"); 
+    }
+    
+    public function getWaitlistPassengers($flight_no){
+        $sql = "SELECT p.SSN, Name, Flight_NO, Seat_NO 
+        FROM PASSENGER p NATURAL JOIN WAITLIST w 
+        WHERE w.Flight_NO = $flight_no;"; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    public function getConfirmedPayments(){
+        $sql = "SELECT * FROM PAYMENT WHERE Confirmed = 1;"; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    public function getPercentBooking($date){
+        $sql = "SELECT Flight_NO, Used_seats,
+                (`Seats_first`+`Seats_bussines`+`Seats_economy`) as Total_seat
+                FROM PLANE p JOIN (
+                    SELECT Flight_NO, Plane_NO, Count(Seat_NO) as Used_seats
+                    FROM FLIGHT NATURAL JOIN BOOKING
+                    WHERE Date = '$date'
+                    group by Plane_NO
+                    ) as j on p.Serial_NO = j.Plane_NO;"; 
+
+        $query_result = $this->execQurey($sql, "GET"); 
+        $outResult = array(); 
+
+        // calcualte ALF for each plane 
+        foreach($query_result as $row){
+            $percent = $row["Used_seats"]/$row["Total_seat"] *100;
+            array_push($outResult, array(
+                "flight_no" => $row["Flight_NO"], 
+                "percent" => round($percent, 0)
+            )); 
+        }
+
+        return $outResult; 
+    }
     
 
+    // for the requirements: the average load factor is a ration for all planes
+    public function getALF($date){
+        $sql = "SELECT Sum(Used_seats) as Sum_usedSeats,
+                Sum((`Seats_first`+`Seats_bussines`+`Seats_economy`)) as Sum_totalSeats
+                FROM PLANE p JOIN (
+                    SELECT Plane_NO, Count(Seat_NO) as Used_seats
+                    FROM FLIGHT NATURAL JOIN BOOKING
+                    WHERE Date = '$date'
+                    group by Plane_NO
+                    ) as j on p.Serial_NO = j.Plane_NO;"; 
+        
+        // execting the query
+        $query_result = $this->execQurey($sql, "GET"); 
+        $outResult = $query_result[0]["Sum_usedSeats"]/$query_result[0]["Sum_totalSeats"] * 100;  
+        return round($outResult, 0); 
+    }
 
+    public function deleteTicket($ticket_no){
+        $sql = "DELETE FROM TICKET WHERE T_NO = '$ticket_no'; "; 
+        return $this->execQurey($sql, "POST"); 
+    
+    }
+
+    public function getPassengerTickets($ssn){
+        $sql = "SELECT y.T_NO, f.Flight_NO, f.Destination, f.Departure, f.Date, y.Seat_NO
+                FROM FLIGHT f JOIN (
+                    SELECT T_NO, t.Flight_NO, t.Seat_NO  
+                    FROM TICKET t JOIN BOOKING b 
+                    ON (t.Flight_NO = b.Flight_NO and t.Seat_NO = b.Seat_NO) 
+                    WHERE SSN = '$ssn'
+                ) 
+                as y ON f.Flight_NO = y.Flight_NO;"; 
+        return $this->execQurey($sql, "GET"); 
+    }
+
+    // public function getFlightOfTicket($ticket_no){
+    //     $sql 
+    // }
+
+    public function updateTicketFlight($ticket, $flight, $seat){
+        $sql = "UPDATE TICKET SET Flight_NO = '$flight' AND Seat_NO = '$seat' WHERE T_NO = '$ticket'; "; 
+        return $this->execQurey($sql, "POST"); 
+    }
 
 
 }
-
-$db = new DataBase(); 
-// print_r($db::getFlightsTo("New York"))
-?> 
+?>

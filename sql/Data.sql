@@ -28,3 +28,9 @@ INSERT INTO PASSENGER (SSN, Name, DoB, Gender, Phone, Email, User_id) VALUES
 
 INSERT INTO `seat` (`Seat_NO`, `Price`, `Status`, `Class`, `Plane_NO`, `Flight_NO`)
 VALUES ('1', '1000', 'available', 'economy', '1', '1');
+
+------------------------------
+
+insert into seat values (2, 1, 500, 'available', 'economy'), (3, 1, 500, 'available', 'economy'); 
+INSERT INTO `flight` (`Flight_NO`, `Date`, `Time`, `Destination`, `Departure`, `Plane_NO`) VALUES (NULL, '2022-05-17', CURRENT_TIME(), 'Tokyo ', 'Dammam', '2');
+INSERT INTO `flight` (`Flight_NO`, `Date`, `Time`, `Destination`, `Departure`, `Plane_NO`) VALUES (NULL, '2022-05-17', CURRENT_TIME(), 'Dammam', 'Jeddah', '1');

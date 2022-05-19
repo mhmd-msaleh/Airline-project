@@ -136,6 +136,19 @@ CREATE TABLE SEAT (
 );
 
 
+-----------------------------------------------
+
+create table Log_cancel_ticket (
+  ticket_no INT(15) NOT NULL, 
+  flight_no INT(15) NOT NULL, 
+  seat_no INT(15) NOT NULL, 
+  FOREIGN KEY (flight_no) references flight(Flight_NO), 
+  foreign key (seat_no) references seat(Seat_NO)
+  );
+
+  CREATE TRIGGER `cancelled_ticket` BEFORE DELETE ON `ticket` FOR EACH ROW INSERT INTO Log_cancel_ticket values (old.T_NO, old.Flight_NO, old.Seat_NO); 
+
+
 
 
 

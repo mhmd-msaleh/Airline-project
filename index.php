@@ -1,50 +1,22 @@
 <?php
 require_once("php/header.php"); 
+include_once("booking.php"); 
 ?>
 
+   <div class="container rounded">
 
-    <!--Booking Section-->
-    <div class="container rounded">
-
-        <form action="php/search.php" method="GET" >
+   <h5>Find My Tickets</h5>
+        <form action="php/ticket/find_tickets.php" method="post" >
             <div class="row">
                 <div class="col-md-6 col-12 mb-4">
                     <div class="form-control d-flex flex-column">
-                        <p class="h-blue">FROM</p> <input class="inputbox" placeholder="City or Airport" type="text" name="Departure">
-                    </div>
-                </div>
-                <div class="col-md-6 col-12 mb-4">
-                    <div class="form-control d-flex flex-column">
-                        <p class="h-blue">TO</p> <input class="inputbox" placeholder="City or Airport" type="text" name="Destination">
+                        <p class="h-blue">Please enter your SSN </p> <input class="inputbox" placeholder="00000000000" type="text" name="ssn">
                     </div>
                 </div>
             </div>
-
-
-            <div class="row">
-                <div class="col-md-6 col-12 mb-4">
-                    <div class="form-control d-flex flex-column">
-                        <p class="h-blue">Date</p> <input class="inputbox textmuted" type="date" name="Date">
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="row">
-                <div class="col-md-3 mb-3">
-                    <div class="form-control d-flex flex-column">
-                        <p class="h-blue">CLASS</p> <select class="border-0 outline-none" name="Class">
-                            <option value="" hidden selected>Class</option>
-                            <option value="economy">Economy</option>
-                            <option value="first">First</option>
-                            <option value="business">Business</option>
-                        </select>
-                    </div>
-                </div>
-            </div>
-            <input type="submit" class="btn btn-primary form-control text-center" value="SHOW FLIGHTS">
+           <input type="submit" class="btn btn-info form-control text-center" value="Find my tickets"> 
         </form>
-    </div>
+    </div> 
 
     <!--About Section-->
     <div id="about" class="container rounded">
