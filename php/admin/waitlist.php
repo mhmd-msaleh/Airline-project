@@ -3,6 +3,10 @@ require("../database.php");
 $db = new DataBase(); 
 $flight_no = $_GET["flight_no"]; 
 $query_result = $db->getWaitlistPassengers($flight_no); 
+
+if(empty($query_result)){
+    echo "There are no waitlist for this flight";
+}
 ?>
 
 
@@ -29,9 +33,9 @@ $query_result = $db->getWaitlistPassengers($flight_no);
                     <div class="card-body">
                         <h5 class="card-title">Passenger Name: <?php echo($table_row["Name"]); ?></h5>
                         <h5 class="card-subtitle mb-2">SSN: <?php echo($table_row["SSN"]);?></h5>
-                        <p class="card-text">Seat Number: <?php echo($table_row["Flight_NO"]);?>
+                        <p class="card-text">Flight Number: <?php echo($table_row["Flight_NO"]);?>
                         </p>
-                        <p class="card-text">Flight Number: <?php echo($table_row["Seat_NO"]);?>
+                        <p class="card-text">Seat Number: <?php echo($table_row["Seat_NO"]);?>
                         </p>
                         </form>
                     </div>

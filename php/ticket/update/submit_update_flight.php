@@ -2,7 +2,7 @@
 require("../../database.php"); 
 $ticket = $_COOKIE["ticket_no"]; 
 $flight = $_POST["flight_no"]; 
-$seat = $_POST["seat_no"]; 
+$seat = $_POST["Seat_NO"]; 
 
 $db = new Database(); 
 

@@ -40,8 +40,8 @@ if(isset($_GET)){
                 <div class="card-body">
                     <form name="flight-<?php echo($table_row["Flight_NO"]); ?>" action="choose_seat.php"
                         method="Get">
-                        <h5 class="card-title"><?php echo($table_row["Destination"]);?> ==>
-                            <?php echo($table_row["Departure"]);?></h5>
+                        <h5 class="card-title"><?php echo($table_row["Departure"]);?> ==>
+                            <?php echo($table_row["Destination"]);?></h5>
                         <p class="card-text">Date: <?php echo($table_row["Date"]);?>
                         </p>
                         <p class="card-text">Time: <?php echo($table_row["Time"]);?>

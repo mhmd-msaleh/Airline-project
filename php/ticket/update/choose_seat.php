@@ -5,7 +5,7 @@ $db = new Database();
 $flight_NO = $_GET["flight_no"]; 
 // $class = $_POST["class"]; 
 $avail_seats = $db->getAvailableSeats($flight_NO, 'class'); 
-print_r($avail_seats); 
+// print_r($avail_seats); 
 
 ?>
 
@@ -32,7 +32,7 @@ print_r($avail_seats);
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Select available seat</h5>
-                        <form method="get" action="submit_update_flight.php">
+                        <form method="post" action="submit_update_flight.php">
                             <select class="custom-select" multiple name="Seat_NO">
                                 <option selected>Available seats</option>
                                 <?php foreach($avail_seats as $row): $i = $row["Seat_NO"];?>
